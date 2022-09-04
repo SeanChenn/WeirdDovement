@@ -198,10 +198,14 @@ public class GameManagerScript : MonoBehaviour
         {
             textGameEnd.text = "Game over\nP1 Win";
         }
-        else
+        else if (iP2Score > iP1Score)
         {
             textGameEnd.text = "Game over\nP2 Win";
-        } 
+        }
+        else
+        {
+            textGameEnd.text = "Game over";
+        }
     }
 
     private void ReturnScene()
