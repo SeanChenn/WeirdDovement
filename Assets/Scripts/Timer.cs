@@ -31,6 +31,7 @@ public class Timer : MonoBehaviour
         yield return new WaitForSeconds(1);
         m_gameOver.SetActive(true);
         Time.timeScale = 0;
+        GameManagerScript.instance.btnReturn.gameObject.SetActive(true);
     }
     
 }

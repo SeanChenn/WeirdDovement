@@ -72,13 +72,13 @@ public class DestructibleObjectState : MonoBehaviour
                 imgObject.sprite = sprites[1];
                 collider2DParent.enabled = false;
                 collider2DTrigger.enabled = false;
-                if (iNum.Equals(0))
+                //if (iNum.Equals(0))
                 {
-                    if (collision.name.Equals("Player1") && GameManagerScript.instance.eClick == EClick.P1Click)
+                    if (GameManagerScript.instance.eClick == EClick.P1Click)
                     {
                         GameManagerScript.instance.iP1Score += iScore;
                     }
-                    if (collision.name.Equals("Player2") && GameManagerScript.instance.eClick == EClick.P2Click)
+                    if (GameManagerScript.instance.eClick == EClick.P2Click)
                     {
                         GameManagerScript.instance.iP2Score += iScore;
                     }
