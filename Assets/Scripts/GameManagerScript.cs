@@ -16,12 +16,14 @@ public class GameManagerScript : MonoBehaviour
     public GameObject goCurrentObject;
     public Image imgP1Item;
     public Image imgP2Item;
+    public Image imgScreen;
+    public Sprite[] spritesScreen;
 
     public float fSpeed = 25;
     public bool isP1TouchObject = false;
     public bool isP2TouchObject = false;
-    private int iP1Score;
-    private int iP2Score;
+    public int iP1Score;
+    public int iP2Score;
 
     public int iP1HitNum;
     public int iP2HitNum;
@@ -42,8 +44,7 @@ public class GameManagerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        txtP1Score.text = iP1Score.ToString();
-        txtP2Score.text = iP2Score.ToString();
+        
     }
 
     // Update is called once per frame
@@ -51,7 +52,7 @@ public class GameManagerScript : MonoBehaviour
     {
         MovePlayer(goPlayer1, 1);
         MovePlayer(goPlayer2, 2);
-
+        ChangeScreen();
     }
 
     /// <summary>
@@ -142,6 +143,19 @@ public class GameManagerScript : MonoBehaviour
         }
     }
 
+    private void ChangeScreen()
+    {
+        txtP1Score.text = iP1Score.ToString();
+        txtP2Score.text = iP2Score.ToString();
+        if ((iP1Score + iP2Score)>30)
+        {
+            imgScreen.sprite = spritesScreen[0];
+        }
+        if ((iP1Score + iP2Score) > 60)
+        {
+            imgScreen.sprite = spritesScreen[1];
+        }
+    }
 }
 public enum EPlayer
 {

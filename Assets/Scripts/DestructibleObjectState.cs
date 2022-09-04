@@ -7,18 +7,21 @@ public class DestructibleObjectState : MonoBehaviour
 {
     public Sprite[] sprites;
     //public Image imgColor;
-    public Image imgObject;
-    private BoxCollider2D collider2D;
+    private Image imgObject;
+    private BoxCollider2D collider2DParent;
+    private BoxCollider2D collider2DTrigger;
 
     public int iNum = 10;
-    bool isP1Touch;
-    bool isP2Touch;
+    public int iScore = 5;
+    private bool isP1Touch;
+    private bool isP2Touch;
     // Start is called before the first frame update
     void Start()
     {
         //imgColor = gameObject.GetComponent<Image>();
         imgObject = gameObject.GetComponent<Image>();
-        collider2D = gameObject.transform.parent.GetComponent<BoxCollider2D>();
+        collider2DParent = gameObject.transform.parent.GetComponent<BoxCollider2D>();
+        collider2DTrigger = gameObject.GetComponent<BoxCollider2D>();
     }
     
     private void OnTriggerStay2D(Collider2D collision)
@@ -61,12 +64,26 @@ public class DestructibleObjectState : MonoBehaviour
             if (iNum<6)
             {
                 //imgColor.color = Color.red;
+                imgObject.sprite = sprites[0];
             }
             if (iNum<1)
             {
                 //imgColor.color = Color.black;
-                imgObject.sprite = sprites[0];
-                collider2D.enabled = false;
+                imgObject.sprite = sprites[1];
+                collider2DParent.enabled = false;
+                collider2DTrigger.enabled = false;
+                if (iNum.Equals(0))
+                {
+                    if (collision.name.Equals("Player1") && GameManagerScript.instance.eClick == EClick.P1Click)
+                    {
+                        GameManagerScript.instance.iP1Score += iScore;
+                    }
+                    if (collision.name.Equals("Player2") && GameManagerScript.instance.eClick == EClick.P2Click)
+                    {
+                        GameManagerScript.instance.iP2Score += iScore;
+                    }
+                    iScore = 0;
+                }
             }
         }
     }
